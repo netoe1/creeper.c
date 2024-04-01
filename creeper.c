@@ -352,16 +352,15 @@ Public License instead of this License.
 #include <time.h>
 #include <string.h>
 #include <signal.h>
-
-
 #define STUFF 5000
+#define BUF_LEN 5000
 static int counter = 0;
 unsigned int __bool = 0;
 char x = '0';
 const char *CHARS = {"abcdefghijklmnopqrstuvwxyz1234567890"};
 char *bigString(){
-    char *malloc_ret = (char*) malloc(2048);
-    for(int i = 0; i < 2048;i++){
+    char *malloc_ret = (char*) malloc(BUF_LEN);
+    for(int i = 0; i < BUF_LEN;i++){
         __bool = rand() % 1;
 
         if(__bool == 0){
@@ -372,7 +371,7 @@ char *bigString(){
             malloc_ret[i] = toupper(CHARS[rand() % strlen(CHARS)]);
         }
     }
-    malloc_ret[2048] = '\0';
+    malloc_ret[BUF_LEN] = '\0';
     return malloc_ret;
 }
 FILE *createAndLoadFile(int times){
