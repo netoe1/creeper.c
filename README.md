@@ -9,7 +9,7 @@ For those who doens't know, Creeper was considered as the first computer virus i
 
 > As noted by Discovery, the Creeper program, often regarded as the first virus, was created in 1971 by Bob Thomas of BBN. Creeper was actually designed as a security test to see if a self-replicating program was possible. It was—sort of. With each new hard drive infected, Creeper would try to remove itself from the previous host. Creeper had no malicious intent and only displayed a simple message: "I'M THE CREEPER. CATCH ME IF YOU CAN!"
 
-Creeper originally **wasn't** a malicious computer virus, it doesn't make any danger for computers. This example 
+Creeper originally **wasn't** a malicious computer virus, it doesn't make any danger for computers. This example **is** considered a malware, so, careful with you do with this power, because some **wrong step can be a crime**.
 
 # Terms of use
 
