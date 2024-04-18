@@ -21,6 +21,10 @@ When you run this program and accepted his conditions, you assume the risk with 
 - There's a function called <strong>enableForking()</strong>, it allow the process forking, when a SIGKILL proceed. So, when you kill by terminal, probably the computer has to crash.
 - Creeper'll create a lot of files, so you HD will overthink, be careful.
 
+# Safety
+This is a **educational versional**, so, for running you should type a real-time generated hash to run. 
+
+
 # Again:
 
 ### I'm not responsible for any damages with people, this software was developed for educational propouses.
